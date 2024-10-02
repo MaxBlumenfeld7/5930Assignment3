@@ -28,7 +28,17 @@ def load_model(filename):
     return model
 
 # Load pre-trained model
-ngram_model = load_model('5930Assignment3/Part 2/models/trigram_model.pkl')
+# ngram_model = load_model('5930Assignment3/Part 2/models/trigram_model.pkl')
+
+
+# Set base directory relative to this file's location
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Use os.path.join to dynamically build the path to the model
+model_path = os.path.join(base_dir, 'models', 'trigram_model.pkl')
+
+# Load pre-trained model using the new model path
+ngram_model = load_model(model_path)
 
 def simple_tokenize(text):
     # This function splits on spaces and punctuation
