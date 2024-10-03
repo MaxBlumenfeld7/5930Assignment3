@@ -28,7 +28,9 @@ def home():
 def predict():
     # Get data from POST request
     data = request.get_json(force=True)
-    
+    print(f"Received data: {data}")  # Add this line to confirm data is received
+
+
     # Ensure that we received the expected array of features
     try:
         features = data['features']
@@ -37,7 +39,8 @@ def predict():
     
     # Convert features into the right format and make a prediction
     prediction = ngram_model.predict([features])
-    
+    print(f"Prediction: {prediction}")  # Add this line to confirm prediction is made
+
     # Return the prediction
     return jsonify(prediction=int(prediction[0]))
 
