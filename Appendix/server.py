@@ -1,11 +1,24 @@
 from flask import Flask, request, jsonify
 import pickle
+import os
 import numpy as np
 
 app = Flask(__name__)
 
+#function to read model
+def load_model(filename):
+    with open(filename, 'rb') as file:
+        model = pickle.load(file)
+    return model
+
+# Set base directory relative to this file's location
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Load the pre-trained model
-model = pickle.load(open('5930Assignment3/Part 2/models/trigram_model.pkl', 'rb'))
+model_path = os.path.join(base_dir, 'models', 'trigram_model.pkl')
+
+# Load pre-trained model using the new model path
+ngram_model = load_model(model_path)
 
 @app.route('/')
 def home():
@@ -23,7 +36,7 @@ def predict():
         return jsonify(error="The 'features' key is missing from the request payload."), 400
     
     # Convert features into the right format and make a prediction
-    prediction = model.predict([features])
+    prediction = ngram_model.predict([features])
     
     # Return the prediction
     return jsonify(prediction=int(prediction[0]))
