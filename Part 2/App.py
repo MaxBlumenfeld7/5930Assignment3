@@ -44,6 +44,7 @@ def simple_tokenize(text):
     # This function splits on spaces and punctuation
     return re.findall(r'\w+|[^\w\s]', text.lower())
 
+
 def predict_with_trigram(text):
     words = simple_tokenize(text)
     
@@ -71,27 +72,6 @@ def predict_with_trigram(text):
             return f"Backed-off prediction: {predicted_word}"
         else:
             return "No prediction available for this context"
-
-# @app.route('/predict', methods=['GET', 'POST'])
-# def predict():
-#     if request.method == 'POST':
-#         try:
-#             data = request.get_json(force=True)
-#             text = data['text']
-#             print('Input was:', text)
-
-#             print('Predicting n-gram')
-#             ngram_prediction = predict_with_trigram(text)
-#             print(f"N-gram prediction: {ngram_prediction}")
-
-#             return jsonify({
-#                 'ngram': ngram_prediction,
-#             })
-#         except Exception as e:
-#             print(f"An error occurred: {str(e)}")
-#             return jsonify({'error': str(e)}), 400
-#     else:  # GET request
-#         return render_template('predict.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
