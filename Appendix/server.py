@@ -15,7 +15,7 @@ def load_model(filename):
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Load the pre-trained model
-model_path = os.path.join(base_dir, 'models', 'trigram_model.pkl')
+model_path = os.path.join(base_dir, 'models', 'model.pkl')
 
 # Load pre-trained model using the new model path
 ngram_model = load_model(model_path)
