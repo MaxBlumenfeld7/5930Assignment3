@@ -1,0 +1,20 @@
+2024-10-02 19:24:19,871 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-10-02 19:24:19,871 INFO: [33mPress CTRL+C to quit[0m
+2024-10-02 19:24:19,879 INFO:  * Restarting with watchdog (fsevents)
+2024-10-02 19:24:22,111 WARNING:  * Debugger is active!
+2024-10-02 19:24:22,165 INFO:  * Debugger PIN: 543-880-915
+2024-10-02 19:25:45,722 INFO: Received POST request for prediction
+2024-10-02 19:25:45,723 ERROR: Invalid input: 'text' key is missing from request
+2024-10-02 19:25:45,725 INFO: 127.0.0.1 - - [02/Oct/2024 19:25:45] "[31m[1mPOST /predict HTTP/1.1[0m" 400 -
+2024-10-02 19:25:56,961 INFO: 127.0.0.1 - - [02/Oct/2024 19:25:56] "GET /predict HTTP/1.1" 200 -
+2024-10-02 19:26:02,184 INFO: Received POST request for prediction
+2024-10-02 19:26:02,185 INFO: Input text: mother
+
+2024-10-02 19:26:02,186 INFO: N-gram prediction: Not enough context for prediction
+2024-10-02 19:26:02,187 INFO: 127.0.0.1 - - [02/Oct/2024 19:26:02] "POST /predict HTTP/1.1" 200 -
+2024-10-02 19:26:07,454 INFO: Received POST request for prediction
+2024-10-02 19:26:07,456 INFO: Input text: your mother
+
+2024-10-02 19:26:07,541 INFO: N-gram prediction: Predicted word: hated
+2024-10-02 19:26:07,541 INFO: 127.0.0.1 - - [02/Oct/2024 19:26:07] "POST /predict HTTP/1.1" 200 -
