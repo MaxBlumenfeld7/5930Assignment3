@@ -14,6 +14,7 @@ with open('model.pkl', 'rb') as file:
     print("Model loaded successfully")
 
 
+# Use the model to make predictions inside the predict route
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(force=True)

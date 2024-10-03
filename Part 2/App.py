@@ -45,32 +45,45 @@ def simple_tokenize(text):
     return re.findall(r'\w+|[^\w\s]', text.lower())
 
 
+
+
 def predict_with_trigram(text):
+    # Tokenize the input text into individual words
     words = simple_tokenize(text)
     
+    # Check if there are fewer than 2 words, which is not enough context for a trigram prediction
     if len(words) < 2:
         return "Not enough context for prediction"
     
+    # Extract the last two words to use as the trigram context
     context = tuple(words[-2:])
     
+    # Load the conditional frequency distribution (CFD) from the n-gram model
     cfd = ngram_model['cfd']
     
+    # Print debugging information: the current context, number of contexts in the model,
+    # and sample the first 5 contexts for reference
     print(f"Context: {context}")
     print(f"Number of contexts in model: {len(cfd)}")
-    print(f"Sample contexts: {list(cfd.keys())[:5]}")  # Print first 5 contexts
+    print(f"Sample contexts: {list(cfd.keys())[:5]}")  # Print first 5 contexts for debugging
     
+    # If the context exists in the model, predict the most likely word following the context
     if context in cfd:
-        predicted_word = cfd[context].max()
+        predicted_word = cfd[context].max()  # Find the word with the highest frequency
         return f"Predicted word: {predicted_word}"
     else:
-        # Try backing off to just the last word
+        # If the context is not found, back off to the last word (bigram prediction)
         last_word = words[-1]
+        # Look for all contexts that match the last word as the second element
         single_word_contexts = [key for key in cfd.keys() if key[1] == last_word]
+        
+        # If there are matching contexts for the last word, select the best one based on total frequencies
         if single_word_contexts:
             best_context = max(single_word_contexts, key=lambda k: sum(cfd[k].values()))
             predicted_word = cfd[best_context].max()
             return f"Backed-off prediction: {predicted_word}"
         else:
+            # If no matching contexts are found, return that no prediction is available
             return "No prediction available for this context"
 
 
